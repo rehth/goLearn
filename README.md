@@ -1,5 +1,4 @@
 # goLearn
-golang learning...
 #### Go 简介
 > Go 编程语言是开源项目。
 > 
