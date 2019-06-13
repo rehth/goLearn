@@ -26,6 +26,7 @@ func main() {
 
 	go func() {
 		// 读取并处理 read/write 请求
+		// state 将被一个单独的 Go 协程拥有，保证数据在并行读取时不会混乱
 		state := make(map[int]int)
 		for {
 			select {
