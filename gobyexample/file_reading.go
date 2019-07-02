@@ -15,16 +15,14 @@ func check(e error) {
 }
 
 func main() {
-	p, _ := os.Getwd()
-	fname := p + "\\const.go"
+	filename := "const.go"
 	// ioutil 包一次读取文件所有数据
-	fmt.Println(p, fname)
-	dat, err := ioutil.ReadFile(fname)
+	dat, err := ioutil.ReadFile(filename)
 	check(err)
 	fmt.Printf("ioutil.ReadFile：\n%s\n", string(dat))
 
 	// os 读取文件
-	f, err := os.Open(fname)
+	f, err := os.Open(filename)
 	defer f.Close()
 	check(err)
 	bs := make([]byte, 15)

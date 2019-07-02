@@ -15,19 +15,19 @@ func checkerr(e error) {
 }
 
 func main() {
-	var wireteString = "测试n "
-	var filename = "./output1.txt"
+	writeString := "测试n "
+	filename := "output.txt"
 	f, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0666)
 	checkerr(err)
 	defer f.Close()
 
 	/***************************** 第一种方式: 使用 io.WriteString 写入文件 ***********************************************/
-	n, err1 := io.WriteString(f, wireteString) //写入文件(字符串)
+	n, err1 := io.WriteString(f, writeString) //写入文件(字符串)
 	checkerr(err1)
 	fmt.Printf("写入 %d 个字节\n", n)
 
 	/*****************************  第二种方式: 使用 ioutil.WriteFile 写入文件 ***********************************************/
-	var d1 = []byte(wireteString)
+	d1 := []byte(writeString)
 	err2 := ioutil.WriteFile(filename, d1, 0666) //写入文件(字节数组)
 	checkerr(err2)
 
