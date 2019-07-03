@@ -34,7 +34,7 @@ func variableTypeDeduction() {
 }
 
 func variableShorter() {
-	//	变量定义简写，仅在函数内部使用
+	// 变量定义简写，仅在函数内部使用
 	a, b, c, s := 2, 3, true, "def"
 	fmt.Println(a, b, c, s)
 
@@ -46,7 +46,7 @@ func euler() {
 }
 
 func triangle() {
-	// 类型装换是强制的
+	// 类型转换是强制的
 	var a, b int = 3, 4
 	var c int
 	c = int(math.Sqrt(float64(a*a + b*b)))
