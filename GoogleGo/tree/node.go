@@ -1,71 +1,30 @@
-package main
+package tree
 
 import (
 	"fmt"
 )
 
-type treeNode struct {
-	value       int
-	left, right *treeNode
+type Node struct {
+	Value       int
+	Left, Right *Node
 }
 
 // 自定义工厂函数
-func createNode(value int) *treeNode {
-	return &treeNode{value: value}
+func CreateNode(value int) *Node {
+	return &Node{Value: value}
 }
 
 // 值接收者
-func (node treeNode) print() {
-	fmt.Print(node.value, " ")
+func (node Node) Print() {
+	fmt.Print(node.Value, " ")
 }
 
 // 指针接收者
-func (node *treeNode) setValue(value int) {
+func (node *Node) SetValue(value int) {
 	// 只有指针才可以改变结构体内容
 	if node == nil {
-		fmt.Println("setting value to nil node. Ignored")
+		fmt.Println("setting Value to nil node. Ignored")
 		return
 	}
-	node.value = value
-}
-
-func (node *treeNode) traverse() {
-	// 中序遍历
-	if node == nil {
-		return
-	}
-	node.left.traverse()
-	node.print()
-	node.right.traverse()
-}
-
-func main() {
-	var root treeNode
-
-	root = treeNode{value: 3}
-	// 结构体实例或实例指针都使用 . 来访问属性
-	root.left = &treeNode{}
-	root.right = &treeNode{5, nil, nil}
-	root.right.left = new(treeNode)
-	root.left.left = createNode(8)
-
-	root.setValue(6)
-	root.print()
-
-	var pRoot *treeNode
-	pRoot.setValue(200)
-	pRoot = &root
-	pRoot.print()
-	pRoot.setValue(100)
-	pRoot.print()
-	root.print()
-
-	nodes := []treeNode{
-		// 省略 结构体名字
-		{value: 3},
-		{},
-		{8, nil, &root},
-	}
-	fmt.Println(nodes)
-	pRoot.traverse()
+	node.Value = value
 }
