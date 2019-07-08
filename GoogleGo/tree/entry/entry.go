@@ -5,6 +5,23 @@ import (
 	"goLearn/GoogleGo/tree"
 )
 
+// 通过 组合 的形式扩充类型
+type myNode struct {
+	node *tree.Node
+}
+
+func (node *myNode) postOrder() {
+	if node == nil || node.node == nil {
+		return
+	}
+	left := myNode{node.node.Left}
+	left.postOrder()
+	right := myNode{node.node.Right}
+	right.postOrder()
+	node.node.Print()
+
+}
+
 func main() {
 	var root tree.Node
 
@@ -34,4 +51,8 @@ func main() {
 	}
 	fmt.Println(nodes)
 	pRoot.Traverse()
+	fmt.Println()
+	fmt.Print("Popping from bock: ")
+	node := myNode{pRoot}
+	node.postOrder()
 }
