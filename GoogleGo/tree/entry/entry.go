@@ -50,9 +50,18 @@ func main() {
 		{8, nil, &root},
 	}
 	fmt.Println(nodes)
+	// Traverse: 8 0 100 0 5
+	fmt.Print("Traverse: ")
 	pRoot.Traverse()
 	fmt.Println()
 	fmt.Print("Popping from bock: ")
 	node := myNode{pRoot}
 	node.postOrder()
+	fmt.Println()
+	fmt.Print("Traverse Count: ")
+	count := 0
+	pRoot.TraverseFunc(func(n *tree.Node) {
+		count ++
+	})
+	fmt.Print(count)
 }
