@@ -17,7 +17,7 @@ func (e UserError) Error() string {
 }
 
 func Handler(writer http.ResponseWriter, request *http.Request) error {
-	if strings.Index(request.URL.Path, Prefix) != 0 {
+	if strings.HasPrefix(request.URL.Path, Prefix) {
 		return UserError("path must start with " + Prefix)
 	}
 	path := request.URL.Path[len(Prefix):]

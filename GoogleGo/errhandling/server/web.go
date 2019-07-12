@@ -26,21 +26,19 @@ func errWrapper(handler appHandler) func(http.ResponseWriter, *http.Request) {
 		err := handler(writer, request)
 		if err != nil {
 			log.Println("Error handling request:", err.Error())
+
+			if e, ok := err.(fileHandler.UserError); ok {
+				http.Error(writer, e.Error(), http.StatusBadRequest)
+				return
+			}
+
 			code := http.StatusOK
 
-			switch err.(type) {
-			case *os.PathError:
-				if os.IsNotExist(err) {
-					code = http.StatusNotFound
-				} else if os.IsPermission(err) {
-					code = http.StatusForbidden
-				} else {
-					code = http.StatusBadRequest
-				}
-
-			case fileHandler.UserError:
-				http.Error(writer, err.Error(), http.StatusBadRequest)
-				return
+			switch {
+			case os.IsNotExist(err):
+				code = http.StatusNotFound
+			case os.IsPermission(err):
+				code = http.StatusForbidden
 			default:
 				code = http.StatusInternalServerError
 			}
