@@ -61,7 +61,12 @@ func main() {
 	fmt.Print("Traverse Count: ")
 	count := 0
 	pRoot.TraverseFunc(func(n *tree.Node) {
-		count ++
+		count++
 	})
-	fmt.Print(count)
+	fmt.Println(count)
+
+	fmt.Println("Traverse with channel")
+	for node := range pRoot.TraverseWithChannel() {
+		fmt.Println(node.Value)
+	}
 }
